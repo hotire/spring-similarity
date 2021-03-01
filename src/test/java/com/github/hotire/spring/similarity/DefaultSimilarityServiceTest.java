@@ -20,4 +20,19 @@ class DefaultSimilarityServiceTest {
         // then
         assertThat(result).isEqualTo(expected);
     }
+
+    @Test
+    void intersection() {
+        // given
+        final String left = "abc";
+        final String right = "abd";
+        final Integer expected = 2;
+        final DefaultSimilarityService service = new DefaultSimilarityService();
+
+        // when
+        final Integer result = service.intersection(left, right);
+
+        // then
+        assertThat(result).isEqualTo(expected);
+    }
 }
