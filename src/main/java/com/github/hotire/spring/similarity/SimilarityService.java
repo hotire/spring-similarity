@@ -13,4 +13,8 @@ public interface SimilarityService {
         return HAMMING_DISTANCE.apply(left, right);
     }
 
+    default Integer intersection(final CharSequence left, final CharSequence right) {
+        return INTERSECTION_SIMILARITY.apply(left, right).getIntersection();
+    }
+
 }
