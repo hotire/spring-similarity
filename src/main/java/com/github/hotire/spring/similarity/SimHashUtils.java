@@ -4,7 +4,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.StringJoiner;
 
-public class SimHashUtils {
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+public final class SimHashUtils {
     private static final int hashbits = 32;
 
     private static final int chunkSize = 4;
@@ -33,7 +37,7 @@ public class SimHashUtils {
 
     public static long hash32(final String str) {
         int sum = 0;
-        for (byte b : str.getBytes()) {
+        for (final byte b : str.getBytes()) {
             sum = sum * 31 + (Byte.toUnsignedInt(b));
         }
         return Integer.toUnsignedLong(sum);
@@ -42,8 +46,8 @@ public class SimHashUtils {
     public static long simhash32(final String source) {
         final int[] bits = new int[hashbits];
         final List<String> tokens = tokens(source);
-        for (String t : tokens) {
-            long v = hash32(t);
+        for (final String t : tokens) {
+            final long v = hash32(t);
             for (int i = hashbits; i >= 1; --i) {
                 if (((v >> (hashbits - i)) & 1) == 1) {
                     ++bits[i - 1];
